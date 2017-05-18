@@ -3,8 +3,10 @@ import './App.css';
 
 
 function UserSearch(props) {
-    return(
+    return (
         <div>
+            <h2 className="website_title">Movie Search:</h2>
+            {props.loading ? <div>Loading...</div> : null}
             <form onSubmit={event => {
                 event.preventDefault();
                 props.search(event.target.elements.search.value);

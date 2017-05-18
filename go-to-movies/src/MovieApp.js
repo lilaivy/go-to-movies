@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import  SearchResults from './SearchResults'
+import HeaderComponent from './HeaderComponent'
+import SearchResults from './SearchResults'
 import UserSearch from './UserSearch'
 
 class MovieApp extends Component {
@@ -12,7 +13,7 @@ class MovieApp extends Component {
             movies: []
         };
 
-        this.search = this.search.bind(this); 
+        this.search = this.search.bind(this);
     }
 
     search(title) {
@@ -21,7 +22,7 @@ class MovieApp extends Component {
             movies: []
         });
         fetch(`http://www.omdbapi.com/?s=${encodeURI(title)}&plot=short&r=json`)
-            .then(res => res.json()) 
+            .then(res => res.json())
             .then(data => data.Search)
             .then(movies => {
                 this.setState({
@@ -33,14 +34,16 @@ class MovieApp extends Component {
 
     render() {
         return (
-            <div> 
-            <SearchResults 
-                loading={this.state.loading} 
-                movies={this.state.movies}
-            />
-             <UserSearch
-                search={this.search}
-             /> 
+            <div>
+                <HeaderComponent />
+                <UserSearch
+                    search={this.search}
+                    loading={this.state.loading}
+                />
+                <SearchResults
+                    movies={this.state.movies}
+                />
+
             </div>
         );
 
